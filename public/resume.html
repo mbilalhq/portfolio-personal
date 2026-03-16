@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bilal Hashmi - Resume</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 
+          Hi Muhammad Bilal Hashmi! 
+          This is your dedicated Resume page. It is separate from the React app, 
+          meaning you can write pure standard HTML and CSS right here to design your CV. 
+        */
+
+        :root {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --accent: #AA367C;
+            --accent-glow: rgba(170, 54, 124, 0.4);
+            --border-color: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 80px 20px 40px 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* The Main A4/Letter Sized Resume Paper Concept */
+        .resume-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header Style */
+        .cv-header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cv-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .cv-header h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Section Styles */
+        .cv-section {
+            margin-bottom: 35px;
+        }
+
+        .cv-section h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 5px;
+        }
+
+        .cv-item {
+            margin-bottom: 20px;
+        }
+
+        .cv-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cv-item-date {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .cv-item p {
+            margin: 8px 0 0 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Print formatting so when users print-to-pdf it looks perfect */
+        @media print {
+            body { background: white; color: black; padding: 0; }
+            .resume-container { background: white; box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .cv-header h1, .cv-header h3, .cv-section h2, .cv-item-title { color: black; }
+            .cv-item p, ul, .cv-item-date { color: #333; }
+            .back-btn { display: none; }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #fff;
+            color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/" class="back-btn">← Back to Portfolio</a>
+
+    <div class="resume-container">
+        <!-- HEADER -->
+        <header class="cv-header">
+            <h1>MUHAMMAD BILAL HASHMI</h1>
+            <h3>Full-Stack Web Developer · Python & FastAPI · ML-Integrated Web Apps</h3>
+            <div class="contact-info">
+                <a href="https://linkedin.com/in/m-bilal-hashmi" target="_blank">LinkedIn</a> |
+                <a href="mailto:mbilalhq38@gmail.com">mbilalhq38@gmail.com</a> |
+                <a href="tel:03100119166">03100119166</a>
+            </div>
+        </header>
+
+        <!-- PROFESSIONAL SUMMARY -->
+        <section class="cv-section">
+            <h2>Professional Summary</h2>
+            <p>
+                Computer Science graduate with hands-on experience building full-stack web applications, REST APIs, and ML-integrated systems. Proficient in Python, FastAPI, React, and vector-search architectures. Passionate about shipping clean, scalable web products that combine modern front-end experiences with intelligent back-end systems. Ready to contribute on day one.
+            </p>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="cv-section">
+            <h2>Technical Skills</h2>
+            <div class="cv-item">
+                <ul>
+                    <li><strong>Front-End:</strong> React, HTML5, CSS3, Responsive Design, REST API Integration</li>
+                    <li><strong>Back-End & APIs:</strong> Python, FastAPI, RESTful Services</li>
+                    <li><strong>AI / ML:</strong> Machine Learning, NLP, Deep Learning (CNN), LLM APIs (Gemini)</li>
+                    <li><strong>Languages:</strong> Python, HTML, CSS, JavaScript, Java, SQL</li>
+                    <li><strong>Tools & Workflow:</strong> Git, GitHub, VS Code</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="cv-section">
+            <h2>Relevant Projects</h2>
+            
+            <div class="cv-item">
+                <div class="cv-item-title">
+                    <span>AI Story Generator — Interactive Storytelling Platform</span>
+                    <span class="cv-item-date">2025</span>
+                </div>
+                <p><strong>Tech Stack:</strong> FastAPI, React, Google Gemini API, Text-to-Speech</p>
+                <ul>
+                    <li>Built a React + FastAPI web app where users shape branching narratives.</li>
+                    <li>Choices are sent to Gemini API which generates contextual story continuations in real time.</li>
+                    <li>Stateful session architecture ensuring story continuity.</li>
+                </ul>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-title">
+                    <span>Chaty_PDFs — AI-Powered Document Chatbot</span>
+                    <span class="cv-item-date">2025</span>
+                </div>
+                <p><strong>Tech Stack:</strong> Python, NLP, Vector Embeddings, ChromaDB</p>
+                <ul>
+                    <li>Engineered a full-stack web app enabling natural-language Q&A over any uploaded PDF.</li>
+                    <li>Handled document ingestion, chunking, embedding, and semantic retrieval end-to-end.</li>
+                    <li>Integrated ChromaDB as the vector store, enabling sub-second search.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section class="cv-section">
+            <h2>Education</h2>
+            <div class="cv-item">
+                <div class="cv-item-title">
+                    <span>National University of Technology (NUTECH)</span>
+                    <span class="cv-item-date">2022 - 2026</span>
+                </div>
+                <p>Bachelor of Science in Computer Science</p>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
