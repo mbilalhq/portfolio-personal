@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
-import TrackVisibility from 'react-on-screen';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { particlesConfig } from "./particles-config";
@@ -45,26 +44,26 @@ function Terminal() {
       margin: '0 auto',
     }}>
       {/* Traffic lights */}
-      <div style={{ display:'flex', alignItems:'center', gap:7, padding:'12px 16px', borderBottom:'1px solid rgba(255,255,255,0.07)', background:'rgba(255,255,255,0.03)' }}>
-        {['#ff5f57','#febc2e','#28c840'].map(c => (
-          <div key={c} style={{ width:12, height:12, borderRadius:'50%', background:c, opacity:0.85 }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)' }}>
+        {['#ff5f57', '#febc2e', '#28c840'].map(c => (
+          <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c, opacity: 0.85 }} />
         ))}
-        <span style={{ marginLeft:8, fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'rgba(255,255,255,0.3)', letterSpacing:'0.05em' }}>
+        <span style={{ marginLeft: 8, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.05em' }}>
           bilal.py
         </span>
       </div>
       {/* Code area */}
-      <div style={{ padding:'18px 20px', minHeight:260, fontFamily:"'JetBrains Mono',monospace", fontSize:12.5, lineHeight:1.9 }}>
+      <div style={{ padding: '18px 20px', minHeight: 260, fontFamily: "'JetBrains Mono',monospace", fontSize: 12.5, lineHeight: 1.9 }}>
         {TERMINAL_LINES.slice(0, visibleLines).map((line, i) => (
-          <div key={i} style={{ color: line.color || 'transparent', minHeight:'1.9em', whiteSpace:'pre-wrap', wordBreak:'break-all' }}>
+          <div key={i} style={{ color: line.color || 'transparent', minHeight: '1.9em', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
             {line.text}
             {i === visibleLines - 1 && cursor && (
-              <span style={{ display:'inline-block', width:8, height:'1em', background:'#7fff6e', marginLeft:2, verticalAlign:'text-bottom' }} />
+              <span style={{ display: 'inline-block', width: 8, height: '1em', background: '#7fff6e', marginLeft: 2, verticalAlign: 'text-bottom' }} />
             )}
           </div>
         ))}
         {visibleLines < TERMINAL_LINES.length && cursor && visibleLines === 0 && (
-          <span style={{ display:'inline-block', width:8, height:'1em', background:'#7fff6e' }} />
+          <span style={{ display: 'inline-block', width: 8, height: '1em', background: '#7fff6e' }} />
         )}
       </div>
     </div>
@@ -109,89 +108,79 @@ export const Banner = () => {
       padding: '120px 0 80px',
     }}>
       {/* Blobs */}
-      <div style={{ position:'absolute', top:-150, left:-150, width:600, height:600, background:'radial-gradient(circle,rgba(127,255,110,0.07) 0%,transparent 70%)', pointerEvents:'none', zIndex:0 }} />
-      <div style={{ position:'absolute', bottom:-100, right:-100, width:500, height:500, background:'radial-gradient(circle,rgba(110,218,255,0.07) 0%,transparent 70%)', pointerEvents:'none', zIndex:0 }} />
-      <div style={{ position:'absolute', top:'40%', left:'35%', width:350, height:350, background:'radial-gradient(circle,rgba(255,110,180,0.05) 0%,transparent 70%)', pointerEvents:'none', zIndex:0 }} />
+      <div style={{ position: 'absolute', top: -150, left: -150, width: 600, height: 600, background: 'radial-gradient(circle,rgba(127,255,110,0.07) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', bottom: -100, right: -100, width: 500, height: 500, background: 'radial-gradient(circle,rgba(110,218,255,0.07) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', top: '40%', left: '35%', width: 350, height: 350, background: 'radial-gradient(circle,rgba(255,110,180,0.05) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
 
-      <Particles id="tsparticles" init={particlesInit} options={particlesConfig} style={{ position:'absolute', inset:0, zIndex:0 }} />
+      <Particles id="tsparticles" init={particlesInit} options={particlesConfig} style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
 
-      <Container style={{ position:'relative', zIndex:1 }}>
-        <Row className="align-items-center" style={{ gap:'48px 0' }}>
+      <Container style={{ position: 'relative', zIndex: 1 }}>
+        <Row className="align-items-center" style={{ gap: '48px 0' }}>
 
           {/* LEFT */}
           <Col xs={12} md={6} xl={7}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+            <div>
 
-                  <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:18, fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, letterSpacing:'0.28em', textTransform:'uppercase', color:'#7fff6e' }}>
-                    <span style={{ display:'block', width:28, height:1, background:'#7fff6e' }} />
-                    Welcome to my Portfolio
-                  </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18, fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#7fff6e' }}>
+                <span style={{ display: 'block', width: 28, height: 1, background: '#7fff6e' }} />
+                Welcome to my Portfolio
+              </div>
 
-                  <h1 style={{ fontSize:'clamp(34px,5.5vw,68px)', fontWeight:800, lineHeight:1.05, letterSpacing:'-0.03em', color:'#fff', marginBottom:12 }}>
-                    I'm Bilal Hashmi,
-                    <br />
-                    <span style={{ color:'transparent', WebkitTextStroke:'1.5px rgba(255,255,255,0.22)' }}>a </span>
-                    <span style={{ background:'linear-gradient(90deg,#7fff6e,#6edaff)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', borderRight:'3px solid #7fff6e', paddingRight:4 }}>
-                      {text}
-                    </span>
-                  </h1>
+              <h1 style={{ fontSize: 'clamp(34px,5.5vw,68px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: '#fff', marginBottom: 12 }}>
+                I'm Bilal Hashmi,
+                <br />
+                <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.22)' }}>a </span>
+                <span style={{ background: 'linear-gradient(90deg,#7fff6e,#6edaff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', borderRight: '3px solid #7fff6e', paddingRight: 4 }}>
+                  {text}
+                </span>
+              </h1>
 
-                  <p style={{ fontSize:14.5, lineHeight:1.8, color:'#c0c0d8', maxWidth:520, marginBottom:0 }}>
-                    I enjoy turning ideas into real products — whether it's a sleek web app,
-                    an intelligent API, or an ML-powered feature. I work with Python, FastAPI,
-                    React, and love building things that are both useful and well-crafted.
-                  </p>
+              <p style={{ fontSize: 14.5, lineHeight: 1.8, color: '#c0c0d8', maxWidth: 520, marginBottom: 0 }}>
+                I enjoy turning ideas into real products — whether it's a sleek web app,
+                an intelligent API, or an ML-powered feature. I work with Python, FastAPI,
+                React, and love building things that are both useful and well-crafted.
+              </p>
 
-                  <div style={{ display:'flex', gap:14, alignItems:'center', marginTop:36, flexWrap:'wrap' }}>
-                    <button
-                      onClick={() => document.getElementById('connect')?.scrollIntoView({ behavior:'smooth' })}
-                      style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'12px 26px', background:'linear-gradient(90deg,#7fff6e,#6edaff)', border:'none', borderRadius:50, color:'#0a0a0f', fontWeight:700, fontSize:14, fontFamily:"'JetBrains Mono',monospace", cursor:'pointer', transition:'transform 0.2s, box-shadow 0.2s', boxShadow:'0 0 24px rgba(127,255,110,0.3)' }}
-                      onMouseOver={e => { e.currentTarget.style.transform='translateY(-3px)'; e.currentTarget.style.boxShadow='0 8px 32px rgba(127,255,110,0.45)'; }}
-                      onMouseOut={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 0 24px rgba(127,255,110,0.3)'; }}
-                    >
-                      Let's Connect <ArrowRightCircle size={18} />
-                    </button>
-                    <div style={{ display:'flex', overflow:'hidden', border:'1px solid rgba(255,255,255,0.15)', borderRadius:50, background:'rgba(255,255,255,0.04)', backdropFilter:'blur(8px)' }}>
-                      <a href="/resume.html" target="_blank" rel="noreferrer"
-                        style={{ textDecoration:'none', color:'#fff', padding:'11px 6px 11px 22px', fontWeight:600, fontSize:13.5, fontFamily:"'JetBrains Mono',monospace", transition:'background 0.2s', letterSpacing:'0.02em' }}
-                        onMouseOver={e => e.currentTarget.style.background='rgba(255,255,255,0.08)'}
-                        onMouseOut={e => e.currentTarget.style.background='transparent'}
-                      >View</a>
-                      <span style={{ width:1, background:'rgba(255,255,255,0.12)', margin:'8px 0' }} />
-                      <a href="/resume-custom.html" target="_blank" rel="noreferrer"
-                        style={{ textDecoration:'none', color:'#a8a8c0', padding:'11px 22px 11px 6px', fontWeight:600, fontSize:13.5, fontFamily:"'JetBrains Mono',monospace", transition:'background 0.2s, color 0.2s', letterSpacing:'0.02em' }}
-                        onMouseOver={e => { e.currentTarget.style.background='rgba(255,255,255,0.08)'; e.currentTarget.style.color='#fff'; }}
-                        onMouseOut={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.color='#a8a8c0'; }}
-                      >Resume</a>
-                    </div>
-                  </div>
-
-                  {/* Stats */}
-                  <div style={{ display:'flex', gap:28, marginTop:44, flexWrap:'wrap' }}>
-                    {[{ num:'3+', label:'Projects Shipped' }, { num:'10+', label:'Technologies' }, { num:'2026', label:'CS Graduate' }].map(s => (
-                      <div key={s.label} style={{ borderLeft:'2px solid rgba(127,255,110,0.3)', paddingLeft:14 }}>
-                        <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-0.02em', lineHeight:1.1 }}>{s.num}</div>
-                        <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:'#606080', letterSpacing:'0.12em', textTransform:'uppercase', marginTop:2 }}>{s.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
+              <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginTop: 36, flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => document.getElementById('connect')?.scrollIntoView({ behavior: 'smooth' })}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 26px', background: 'linear-gradient(90deg,#7fff6e,#6edaff)', border: 'none', borderRadius: 50, color: '#0a0a0f', fontWeight: 700, fontSize: 14, fontFamily: "'JetBrains Mono',monospace", cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: '0 0 24px rgba(127,255,110,0.3)' }}
+                  onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(127,255,110,0.45)'; }}
+                  onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(127,255,110,0.3)'; }}
+                >
+                  Let's Connect <ArrowRightCircle size={18} />
+                </button>
+                <div style={{ display: 'flex', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 50, background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(8px)' }}>
+                  <a href="/resume.html" target="_blank" rel="noreferrer"
+                    style={{ textDecoration: 'none', color: '#fff', padding: '11px 6px 11px 22px', fontWeight: 600, fontSize: 13.5, fontFamily: "'JetBrains Mono',monospace", transition: 'background 0.2s', letterSpacing: '0.02em' }}
+                    onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+                    onMouseOut={e => e.currentTarget.style.background = 'transparent'}
+                  >View</a>
+                  <span style={{ width: 1, background: 'rgba(255,255,255,0.12)', margin: '8px 0' }} />
+                  <a href="/resume-custom.html" target="_blank" rel="noreferrer"
+                    style={{ textDecoration: 'none', color: '#a8a8c0', padding: '11px 22px 11px 6px', fontWeight: 600, fontSize: 13.5, fontFamily: "'JetBrains Mono',monospace", transition: 'background 0.2s, color 0.2s', letterSpacing: '0.02em' }}
+                    onMouseOver={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = '#fff'; }}
+                    onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#a8a8c0'; }}
+                  >Resume</a>
                 </div>
-              )}
-            </TrackVisibility>
+              </div>
+
+              {/* Stats */}
+              <div style={{ display: 'flex', gap: 28, marginTop: 44, flexWrap: 'wrap' }}>
+                {[{ num: '3+', label: 'Projects Shipped' }, { num: '10+', label: 'Technologies' }, { num: '2026', label: 'CS Graduate' }].map(s => (
+                  <div key={s.label} style={{ borderLeft: '2px solid rgba(127,255,110,0.3)', paddingLeft: 14 }}>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.1 }}>{s.num}</div>
+                    <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#606080', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: 2 }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
           </Col>
 
           {/* RIGHT — Terminal */}
           <Col xs={12} md={6} xl={5}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div style={{ opacity: isVisible ? 1 : 0, transition:'opacity 0.6s 0.2s ease' }}>
-                  <Terminal />
-                </div>
-              )}
-            </TrackVisibility>
+            <Terminal />
           </Col>
 
         </Row>
