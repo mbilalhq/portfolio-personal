@@ -111,37 +111,181 @@ p.danger { color: #ff6b6b; }
   border-right: 0.08em solid #666;
 }
 
-/************ Responsive: Mobile ************/
+/************ Responsive: Tablet landscape (≤1024px) ************/
+@media (max-width: 1024px) {
+  /* Banner: reduce hero padding */
+  #home {
+    padding: 100px 0 60px !important;
+  }
+
+  /* Terminal font smaller */
+  #home .row > [class*="col-"] + [class*="col-"] div[style*="minHeight"] {
+    font-size: 11px !important;
+  }
+}
+
+/************ Responsive: Tablet portrait (≤768px) ************/
 @media (max-width: 768px) {
   section {
-    padding: 60px 0 !important;
+    padding: 56px 0 !important;
   }
 
   h2 {
     font-size: clamp(24px, 6vw, 36px) !important;
   }
 
-  /* Stack About columns */
-  .about .row > [class*="col-md"] {
-    flex: 0 0 100%;
-    max-width: 100%;
+  /* Banner: stack columns, reduce padding */
+  #home {
+    padding: 90px 0 48px !important;
+  }
+  #home h1 {
+    font-size: clamp(28px, 7vw, 48px) !important;
+  }
+  #home p {
+    font-size: 13.5px !important;
+  }
+
+  /* About: stack left/right columns */
+  #about .row > [class*="col-lg"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Skills: soft skills cards smaller */
+  #skills [style*="width: 200px"],
+  #skills [style*="width:200px"] {
+    width: 160px !important;
+  }
+
+  /* Projects: 2-column grid */
+  #projects .row > [class*="col-md"] {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  /* Contact: stack form + info */
+  #connect .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Footer: bottom bar stacks */
+  footer [style*="justifyContent"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* Footer: stack columns */
+  footer .row > [class*="col-md"] {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    margin-bottom: 12px !important;
+  }
+  footer .row > [class*="col-md-4"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/************ Responsive: Large phone (≤480px) ************/
+@media (max-width: 480px) {
+  section {
+    padding: 44px 0 !important;
+  }
+
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Banner */
+  #home {
+    padding: 80px 0 40px !important;
+  }
+  #home h1 {
+    font-size: clamp(24px, 8vw, 36px) !important;
+  }
+
+  /* Stats row: smaller text */
+  #home [style*="gap: 28"] {
+    gap: 18px !important;
+  }
+
+  /* Projects: single column */
+  #projects .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Skills soft cards: 2-up */
+  #skills [style*="width: 200px"],
+  #skills [style*="width:200px"] {
+    width: calc(50% - 10px) !important;
+    min-width: 0 !important;
+  }
+
+  /* Footer: all columns full width */
+  footer .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  /* Skills grid smaller */
-  .soft-skills-grid > div {
-    width: calc(50% - 10px) !important;
+  /* Contact social chips */
+  #connect [style*="gap: 10"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Modal: full-width on phone */
+  [style*="maxWidth: 640px"],
+  [style*="maxWidth:640px"] {
+    max-width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 14px !important;
   }
 }
 
-@media (max-width: 480px) {
-  section {
-    padding: 48px 0 !important;
-  }
-
+/************ Responsive: Small phone (≤360px) ************/
+@media (max-width: 360px) {
   .container {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  #home {
+    padding: 74px 0 36px !important;
+  }
+  #home h1 {
+    font-size: 24px !important;
+  }
+  #home p {
+    font-size: 12.5px !important;
+  }
+
+  /* CTA buttons stack vertically */
+  #home [style*="gap: 14"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  #home [style*="gap: 14"] button,
+  #home [style*="gap: 14"] div {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Skills soft cards: single column */
+  #skills [style*="width: 200px"],
+  #skills [style*="width:200px"] {
+    width: 100% !important;
+  }
+
+  /* About info cards: tighter */
+  .about-info-card {
+    padding: 16px 16px !important;
   }
 }
+

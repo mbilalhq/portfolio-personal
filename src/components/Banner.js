@@ -75,7 +75,7 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(100 - Math.random() * 50);
-  const toRotate = ["Full-Stack Web Dev", "FastAPI Expert", "ML/AI Engineer"];
+  const toRotate = ["Full-Stack Developer", "FastAPI Developer", "ML/AI Enthusiast", "Digital Innovator"];
   const period = 1000;
 
   const tick = useCallback(() => {
@@ -151,13 +151,13 @@ export const Banner = () => {
                   Let's Connect <ArrowRightCircle size={18} />
                 </button>
                 <div style={{ display: 'flex', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 50, background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(8px)' }}>
-                  <a href="/resume.html" target="_blank" rel="noreferrer"
+                  <a href="/resume.html"
                     style={{ textDecoration: 'none', color: '#fff', padding: '11px 6px 11px 22px', fontWeight: 600, fontSize: 13.5, fontFamily: "'JetBrains Mono',monospace", transition: 'background 0.2s', letterSpacing: '0.02em' }}
                     onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
                     onMouseOut={e => e.currentTarget.style.background = 'transparent'}
                   >View</a>
                   <span style={{ width: 1, background: 'rgba(255,255,255,0.12)', margin: '8px 0' }} />
-                  <a href="/resume-custom.html" target="_blank" rel="noreferrer"
+                  <a href="/resume-custom.html"
                     style={{ textDecoration: 'none', color: '#a8a8c0', padding: '11px 22px 11px 6px', fontWeight: 600, fontSize: 13.5, fontFamily: "'JetBrains Mono',monospace", transition: 'background 0.2s, color 0.2s', letterSpacing: '0.02em' }}
                     onMouseOver={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = '#fff'; }}
                     onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#a8a8c0'; }}
