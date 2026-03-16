@@ -38,36 +38,32 @@ export const Skills = () => {
                         <h3 style={{color: '#AA367C', marginBottom: '20px', marginTop: '30px'}}>Technical Skills</h3>
                         <Carousel responsive={responsive} infinite={true} autoPlay={true} autoPlaySpeed={3000} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
-                                <img src={meter1} alt="C++" />
-                                <h5>C++</h5>
+                                <img src={meter1} alt="React" />
+                                <h5>React & HTML/CSS</h5>
                             </div>
                             <div className="item">
-                                <img src={meter1} alt="Java" />
-                                <h5>Java</h5>
+                                <img src={meter1} alt="FastAPI" />
+                                <h5>Python & FastAPI</h5>
                             </div>
                             <div className="item">
-                                <img src={meter1} alt="Python" />
-                                <h5>Python</h5>
+                                <img src={meter1} alt="Machine Learning" />
+                                <h5>Machine Learning / CNN</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="SQL" />
-                                <h5>SQL</h5>
+                                <img src={meter2} alt="NLP" />
+                                <h5>NLP & Gemini API</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="FastAPI" />
-                                <h5>FastAPI</h5>
+                                <img src={meter2} alt="Vector Embeddings" />
+                                <h5>ChromaDB & Embeddings</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="Flask" />
-                                <h5>Flask</h5>
+                                <img src={meter3} alt="SQL" />
+                                <h5>SQL & Databases</h5>
                             </div>
                             <div className="item">
                                 <img src={meter3} alt="Git" />
-                                <h5>Git</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="GitHub" />
-                                <h5>GitHub</h5>
+                                <h5>Git & GitHub</h5>
                             </div>
                         </Carousel>
                         <h3 style={{color: '#AA367C', marginBottom: '20px', marginTop: '40px'}}>Soft Skills</h3>

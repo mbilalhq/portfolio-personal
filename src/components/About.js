@@ -22,16 +22,16 @@ export const About = () => {
                           <h3>Education</h3>
                           <div className="education-item">
                             <h4>Bachelor of Computer Science</h4>
-                            <p className="institution">National University of Technology</p>
-                            <p className="location">📍 Islamabad, Pakistan</p>
+                            <p className="institution">National University of Technology (NUTECH)</p>
+                            <p className="location">📍 Islamabad, Pakistan (2022 – 2026)</p>
                           </div>
                         </div>
                       </Col>
                       <Col md={6}>
                         <div className="about-box">
                           <h3>What I Do</h3>
-                          <p>I'm a passionate Full Stack Developer specializing in building modern web applications and AI-powered solutions. With expertise in Python, C++, Java, FastAPI/Flask, and Git/GitHub, I create scalable, efficient, and user-friendly solutions.</p>
-                          <p style={{marginTop: '15px'}}>I bring strong communication skills, excellent problem-solving abilities, and a commitment to continuous learning. I'm a hard worker who loves turning complex challenges into elegant solutions.</p>
+                          <p>I'm a passionate Full Stack Developer specializing in building modern web applications and AI-powered solutions. With expertise in Python, React, FastAPI, and Git/GitHub, I create scalable, efficient, and user-friendly solutions.</p>
+                          <p style={{marginTop: '15px'}}>Recently, I've focused on integrating Machine Learning and LLMs (like Google Gemini API) into full-stack applications. I bring strong communication skills, excellent problem-solving abilities, and a commitment to continuous learning.</p>
                         </div>
                       </Col>
                     </Row>
@@ -40,7 +40,7 @@ export const About = () => {
                         <div className="about-box contact-info">
                           <h3>Get In Touch</h3>
                           <div className="contact-details">
-                            <p><strong>📧 Email:</strong> <a href="mailto:mbilalhq4u@gmail.com">mbilalhq4u@gmail.com</a></p>
+                            <p><strong>📧 Email:</strong> <a href="mailto:mbilalhq38@gmail.com">mbilalhq38@gmail.com</a></p>
                             <p><strong>📱 Mobile:</strong> <a href="tel:+923100119166">0310 0119166</a></p>
                             <p><strong>💬 WhatsApp:</strong> <a href={whatsappUrl} target="_blank" rel="noreferrer">0310 0119166</a></p>
                             <p><strong>🔗 LinkedIn:</strong> <a href={linkedInUrl} target="_blank" rel="noreferrer">linkedin.com/in/m-bilal-hashmi</a></p>

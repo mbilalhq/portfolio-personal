@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Col, Modal, Button } from "react-bootstrap";
+import Tilt from 'react-parallax-tilt';
 
 export const ProjectCard = ({ title, description, fullDescription, features, imgUrl, tech, github }) => {
   const [showModal, setShowModal] = useState(false);
@@ -10,13 +11,24 @@ export const ProjectCard = ({ title, description, fullDescription, features, img
   return (
     <>
       <Col size={12} sm={6} md={4}>
-        <div className="proj-box" onClick={handleShow}>
-          <div className="proj-content">
-            <h4>{title}</h4>
-            <span>{description}</span>
-            {tech && <p className="tech-tag">{tech}</p>}
+        <Tilt
+          className="parallax-effect"
+          tiltMaxAngleX={15}
+          tiltMaxAngleY={15}
+          perspective={800}
+          transitionSpeed={1500}
+          scale={1.05}
+          gyroscope={true}
+        >
+          <div className="proj-box" onClick={handleShow} style={{ cursor: 'pointer' }}>
+            {imgUrl && <img src={imgUrl} alt={title} className="proj-img" />}
+            <div className="proj-content">
+              <h4>{title}</h4>
+              <span>{description}</span>
+              {tech && <p className="tech-tag" style={{ marginTop: '10px', fontSize: '0.85rem', color: '#B8B8B8' }}>{tech}</p>}
+            </div>
           </div>
-        </div>
+        </Tilt>
       </Col>
 
       <Modal show={showModal} onHide={handleClose} centered size="lg">

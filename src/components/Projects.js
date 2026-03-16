@@ -11,35 +11,47 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "Image Search Engine Using CNN",
-      description: "A compact, self-hosted image search engine built with Flask and deep visual embeddings. Uses CLIP and ResNet for feature extraction with HSV color histograms and FAISS for fast similarity search.",
-      fullDescription: "In domains like jewelry designing, fashion, and creative industries, organizations often accumulate thousands of images over time. Without an efficient search system, it becomes extremely difficult to check whether a specific design or concept already exists in the collection. Traditional keyword-based search is insufficient for visual data, as many designs lack descriptive metadata. To address this challenge, this project provides a content-based image search engine that allows users to find visually similar images by uploading an example. By combining semantic, visual, and color-based embeddings, it enables accurate and efficient discovery of related designs.",
-      features: [
-        "Search by image - upload an image to find visually similar images",
-        "Multi-modal embeddings: CLIP (ViT-B/32), ResNet50, and HSV color histograms",
-        "Fast nearest-neighbor search using FAISS",
-        "Persistent feature cache to speed startup (image_features.pkl)",
-        "Simple password-protected UI with responsive layout",
-        "Results fetched from database based on similarity scores"
-      ],
-      imgUrl: projImg1,
-      tech: "Python, Flask, CLIP (ViT-B/32), ResNet50, FAISS, HSV Color Analysis, Deep Learning",
-      github: "https://github.com/BilalHq38/Image_Search_Engine_Using_CNN.git"
-    },
-    {
-      title: "Chaty_PDFs",
-      description: "AI-Powered Chatbot for Document Interaction. Chat with PDF documents using vector embeddings stored in ChromaDB for fast semantic search. Get context-aware answers to natural-language questions without manual reading.",
-      imgUrl: projImg2,
-      tech: "Python, NLP, Embeddings, ChromaDB, HTML, AI Chatbot",
-      github: "https://github.com/BilalHq38/Chaty_PDFs.git"
-    },
-    {
       title: "AI Story Generator",
-      description: "Interactive AI-Driven Storytelling Platform. Dynamic choose-your-own-adventure stories using Google Gemini with multilingual text-to-speech narration in 1,100+ languages.",
+      description: "Interactive Storytelling Platform. Designed stateful session architecture ensuring story continuity.",
+      fullDescription: "Built a React + FastAPI web app where users shape branching narratives; choices are sent to Gemini API which generates contextual story continuations in real time. Integrated multilingual text-to-speech narration, showcasing third-party API orchestration.",
+      features: [
+        "React + FastAPI web app for branching narratives",
+        "Generates contextual continuations in real time via Gemini API",
+        "Multilingual text-to-speech narration",
+        "Stateful session architecture for story continuity"
+      ],
       imgUrl: projImg3,
       tech: "FastAPI, React, Google Gemini API, Text-to-Speech",
       github: "https://github.com/BilalHq38/AI-Story-Generator.git"
     },
+    {
+      title: "Chaty_PDFs",
+      description: "AI-Powered Document Chatbot. Engineered a full-stack web app enabling Q&A over uploaded PDFs.",
+      fullDescription: "Engineered a full-stack web app enabling natural-language Q&A over any uploaded PDF — handling document ingestion, chunking, embedding, and semantic retrieval end-to-end. Integrated ChromaDB as the vector store, enabling sub-second search. Delivered a responsive HTML chat interface that streams answers back in real time.",
+      features: [
+        "Natural-language Q&A over uploaded PDFs",
+        "Sub-second semantic search via ChromaDB vector store",
+        "Document ingestion, chunking, and embedding",
+        "Real-time text streaming over responsive UI"
+      ],
+      imgUrl: projImg2,
+      tech: "Python, NLP, Vector Embeddings, ChromaDB, HTML",
+      github: "https://github.com/BilalHq38/Chaty_PDFs.git"
+    },
+    {
+      title: "Image Search Engine",
+      description: "Content-Based Image Retrieval System. Built a CNN-powered retrieval engine finding visually similar images.",
+      fullDescription: "Built a CNN-powered retrieval engine that finds visually similar images using feature embeddings — eliminating reliance on fragile metadata matching. Designed a responsive front-end returning ranked image results in real time. Fine-tuned embedding extraction layers to improve retrieval precision.",
+      features: [
+        "CNN-powered feature extraction for visual similarity",
+        "No reliance on explicit metadata tags",
+        "Real-time ranked image retrieval UI",
+        "Fine-tuned embedding extraction layers"
+      ],
+      imgUrl: projImg1,
+      tech: "Python, CNN, Deep Learning, Feature Embeddings, HTML",
+      github: "https://github.com/BilalHq38/Image_Search_Engine_Using_CNN.git"
+    }
   ];
 
   return (
