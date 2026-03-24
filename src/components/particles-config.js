@@ -19,11 +19,7 @@ export const particlesConfig = {
       value: ["#7fff6e", "#6edaff", "#ff6eb4", "#ffffff"],
     },
     links: {
-      color: "#6edaff",
-      distance: 140,
-      enable: true,
-      opacity: 0.12,
-      width: 1,
+      enable: false,
     },
     collisions: { enable: false },
     move: {

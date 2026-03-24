@@ -4,10 +4,28 @@ import { ProjectCard } from "./ProjectCard";
 import projImg1 from "../assets/img/project_imagesearch.png";
 import projImg2 from "../assets/img/project_chatpdf.png";
 import projImg3 from "../assets/img/project_aistory.png";
+import fypImg from "../assets/img/projectpulse_eng.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
 const ALL_PROJECTS = [
+  {
+    title: "Pulse-Engine AI-Powered Omni-Channel CRM",
+    description: "FYP · Unified social inbox with AI-driven responses. Built in collaboration with Rockville Technologies.",
+    fullDescription: "Final Year Project built in collaboration with Rockville Technologies. An intelligent CRM system that unifies customer conversations from WhatsApp, Facebook, and Instagram into a single dashboard. Uses AI identity resolution to detect when the same person contacts across multiple platforms, and provides context-aware AI responses powered by LLMs. Sentiment analysis automatically escalates negative or harmful interactions to human agents.",
+    features: [
+      "Omni-channel inbox — WhatsApp, Facebook & Instagram unified",
+      "AI identity resolution: same person across multiple platforms auto-linked",
+      "Context-aware AI responses powered by LLMs with full conversation history",
+      "Sentiment analysis with automatic human escalation",
+      "Role-based agent dashboard with real-time message routing",
+      "Containerised microservices via Docker, deployed on AWS",
+    ],
+    imgUrl: fypImg,
+    tech: "React, FastAPI, PostgreSQL, Docker, AWS, LLMs, NLP",
+    isFYP: true,
+    category: ["all", "fyp", "aiml", "webapps"],
+  },
   {
     title: "AI Story Generator",
     description: "Interactive Storytelling Platform. Stateful session architecture for story continuity.",
@@ -59,6 +77,7 @@ const ALL_PROJECTS = [
 
 const TABS = [
   { key: 'all',     label: 'All Projects' },
+  { key: 'fyp',     label: 'FYP' },
   { key: 'aiml',   label: 'AI / ML' },
   { key: 'webapps',label: 'Web Apps' },
 ];
@@ -72,7 +91,6 @@ export const Projects = () => {
     <section
       id="projects"
       style={{
-        background: 'linear-gradient(180deg,#0a0a0f 0%,#0d0d18 100%)',
         padding: '80px 0',
         position: 'relative',
         overflow: 'hidden',

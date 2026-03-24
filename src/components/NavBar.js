@@ -86,18 +86,15 @@ export const NavBar = () => {
 
             {/* Desktop nav links */}
             <div className="nav-desktop-links" style={{ display:'flex', alignItems:'center', gap:4 }}>
-              {['home','about','skills','projects'].map(link => (
-                <a
-                  key={link}
-                  href={`#${link}`}
-                  style={activeLink === link ? linkActive : linkBase}
-                  onClick={() => onUpdateActiveLink(link)}
-                  onMouseOver={e => { if (activeLink !== link) { e.currentTarget.style.color='#fff'; e.currentTarget.style.background='rgba(255,255,255,0.05)'; }}}
-                  onMouseOut={e => { if (activeLink !== link) { e.currentTarget.style.color='#a8a8c0'; e.currentTarget.style.background='transparent'; }}}
-                >
-                  {link.charAt(0).toUpperCase() + link.slice(1)}
-                </a>
-              ))}
+                {['home','about','skills','experience','projects'].map(link => (
+                  <a
+                    key={link} href={`#${link}`}
+                    style={activeLink === link ? { ...linkActive, padding:'10px 16px' } : { ...linkBase, padding:'10px 16px' }}
+                    onClick={() => onUpdateActiveLink(link)}
+                  >
+                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                  </a>
+                ))}
             </div>
 
             {/* Desktop right: socials + CTA */}
@@ -150,7 +147,7 @@ export const NavBar = () => {
               borderRadius:16, animation:'navSlideDown 0.2s ease',
             }}>
               <div style={{ display:'flex', flexDirection:'column', gap:6, marginBottom:16 }}>
-                {['home','about','skills','projects'].map(link => (
+              {['home','about','skills','experience','projects'].map(link => (
                   <a
                     key={link} href={`#${link}`}
                     style={activeLink === link ? { ...linkActive, padding:'10px 16px' } : { ...linkBase, padding:'10px 16px' }}

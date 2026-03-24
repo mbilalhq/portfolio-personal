@@ -26,7 +26,6 @@ export const Footer = () => {
 
   return (
     <footer style={{
-      background: 'linear-gradient(180deg,#0a0a0f 0%,#07070d 100%)',
       borderTop: '1px solid rgba(255,255,255,0.07)',
       padding: '52px 0 28px',
       position: 'relative',
@@ -171,9 +170,6 @@ export const Footer = () => {
           <p style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#404060' }}>
             © {year} Muhammad Bilal Hashmi. All Rights Reserved.
           </p>
-          <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#303048', letterSpacing: '0.08em' }}>
-            Built with a little help from <span style={{ color: '#6edaff' }}>AI</span>
-          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#404060' }}>
             <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#7fff6e', display: 'inline-block', animation: 'footerPulse 2s ease-in-out infinite' }} />
             Available for opportunities

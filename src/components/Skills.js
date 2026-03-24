@@ -39,7 +39,6 @@ export const Skills = () => {
     <section
       id="skills"
       style={{
-        background: 'linear-gradient(180deg,#0d0d18 0%,#0a0a0f 100%)',
         padding: '80px 0',
         position: 'relative',
         overflow: 'hidden',
@@ -81,7 +80,7 @@ export const Skills = () => {
                       responsive={responsive}
                       infinite={true}
                       autoPlay={true}
-                      autoPlaySpeed={3000}
+                      autoPlaySpeed={1800}
                       containerClass=""
                       itemClass=""
                     >

@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Col } from "react-bootstrap";
 import Tilt from 'react-parallax-tilt';
 
-export const ProjectCard = ({ title, description, fullDescription, features, imgUrl, tech, github, postLink }) => {
+export const ProjectCard = ({ title, description, fullDescription, features, imgUrl, tech, github, postLink, isFYP }) => {
   const [showModal, setShowModal] = useState(false);
   const [imgError, setImgError] = useState(false);
 
   const techArr = tech ? tech.split(',').map(t => t.trim()) : [];
+  const borderColor = isFYP ? 'rgba(255,210,80,0.35)' : 'rgba(255,255,255,0.09)';
+  const hoverBorder = isFYP ? 'rgba(255,210,80,0.55)' : 'rgba(110,218,255,0.3)';
+  const hoverShadow = isFYP ? '0 12px 40px rgba(255,210,80,0.15), 0 0 0 1px rgba(255,210,80,0.2)' : '0 12px 40px rgba(110,218,255,0.1), 0 0 0 1px rgba(110,218,255,0.15)';
+  const cardBg = isFYP ? 'rgba(255,210,80,0.03)' : 'rgba(255,255,255,0.025)';
+  const imgAreaBg = isFYP ? 'linear-gradient(135deg,rgba(255,210,80,0.08),rgba(255,110,180,0.06))' : 'rgba(255,255,255,0.03)';
 
   return (
     <>
@@ -24,27 +29,46 @@ export const ProjectCard = ({ title, description, fullDescription, features, img
             onClick={() => setShowModal(true)}
             style={{
               height: '100%',
-              background: 'rgba(255,255,255,0.025)',
-              border: '1px solid rgba(255,255,255,0.09)',
+              background: cardBg,
+              border: `1px solid ${borderColor}`,
               borderRadius: 16,
               overflow: 'hidden',
               cursor: 'pointer',
               transition: 'border-color 0.25s, box-shadow 0.25s',
               display: 'flex',
               flexDirection: 'column',
+              position: 'relative',
             }}
             onMouseOver={e => {
-              e.currentTarget.style.borderColor='rgba(110,218,255,0.3)';
-              e.currentTarget.style.boxShadow='0 12px 40px rgba(110,218,255,0.1), 0 0 0 1px rgba(110,218,255,0.15)';
+              e.currentTarget.style.borderColor = hoverBorder;
+              e.currentTarget.style.boxShadow = hoverShadow;
             }}
             onMouseOut={e => {
-              e.currentTarget.style.borderColor='rgba(255,255,255,0.09)';
-              e.currentTarget.style.boxShadow='none';
+              e.currentTarget.style.borderColor = borderColor;
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
+            {isFYP && <div style={{ position:'absolute', top:0, left:0, right:0, height:2, background:'linear-gradient(90deg,#ffd250,#ff6eb4,#ffd250)', zIndex:5 }} />}
+
             {/* Image */}
-            <div style={{ position:'relative', overflow:'hidden', height:180, background:'rgba(255,255,255,0.03)', flexShrink:0 }}>
-              {imgUrl && !imgError ? (
+            <div style={{ position:'relative', overflow:'hidden', height:180, background: imgAreaBg, flexShrink:0 }}>
+              {isFYP && imgUrl && !imgError ? (
+                <img
+                  src={imgUrl} alt={title}
+                  onError={() => setImgError(true)}
+                  style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.4s ease' }}
+                  onMouseOver={e => e.currentTarget.style.transform='scale(1.06)'}
+                  onMouseOut={e => e.currentTarget.style.transform='scale(1)'}
+                />
+              ) : isFYP ? (
+                <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:10 }}>
+                  <div style={{ fontSize:52, lineHeight:1 }}>
+                    <svg width="52" height="52" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="rgba(255,210,80,0.12)"/><path d="M32 16v32M20 24h24M20 32h24M20 40h24" stroke="#ffd250" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="24" r="3" fill="#6edaff"/><circle cx="16" cy="32" r="3" fill="#7fff6e"/><circle cx="16" cy="40" r="3" fill="#ff6eb4"/></svg>
+                  </div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9.5, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,210,80,0.6)', textAlign:'center' }}>Omni-Channel CRM</div>
+                </div>
+              ) : null}
+              {!isFYP && (imgUrl && !imgError ? (
                 <img
                   src={imgUrl} alt={title}
                   onError={() => setImgError(true)}
@@ -58,9 +82,10 @@ export const ProjectCard = ({ title, description, fullDescription, features, img
                   fontSize:42, userSelect:'none' }}>
                   💻
                 </div>
-              )}
+              ))}
               {/* Overlay gradient */}
               <div style={{ position:'absolute', bottom:0, left:0, right:0, height:60, background:'linear-gradient(to top,rgba(17,17,24,0.9),transparent)', pointerEvents:'none' }} />
+              {isFYP && <div style={{ position:'absolute', top:10, left:10, padding:'4px 10px', background:'rgba(255,210,80,0.15)', backdropFilter:'blur(8px)', border:'1px solid rgba(255,210,80,0.35)', borderRadius:20, fontSize:9, fontFamily:"'JetBrains Mono',monospace", color:'#ffd250', letterSpacing:'0.1em' }}>FYP</div>}
               {/* Click hint */}
               <div style={{
                 position:'absolute', top:10, right:10,

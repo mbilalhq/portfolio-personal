@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import profileImg from "../assets/img/Img_portfolio.png";
 
 /* ── Inject CSS once ── */
 const CSS = `
@@ -103,6 +104,83 @@ const CSS = `
     transition: all 0.22s ease;
   }
 
+  .profile-img-wrap {
+    position: relative;
+    display: inline-block;
+  }
+  .profile-img-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #7fff6e, #6edaff, #ff6eb4, #7fff6e);
+    animation: profileRingSpin 4s linear infinite;
+    z-index: 0;
+    filter: blur(1px);
+    opacity: 0.7;
+  }
+  .profile-img-ring-inner {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: #0a0a0f;
+    z-index: 1;
+  }
+  .profile-img-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(127,255,110,0.25) 0%, rgba(110,218,255,0.15) 50%, transparent 80%);
+    z-index: 1;
+  }
+  .profile-img-container {
+    position: relative;
+    z-index: 2;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(127,255,110,0.3);
+    box-shadow: 0 0 40px rgba(127,255,110,0.2), 0 0 80px rgba(110,218,255,0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .profile-img-wrap:hover .profile-img-ring {
+    opacity: 1;
+    filter: blur(2px);
+    animation-duration: 2s;
+  }
+  .profile-img-wrap:hover .profile-img-glow {
+    animation: profileGlowPulse 1.5s ease-in-out infinite;
+  }
+  .profile-img-wrap:hover .profile-img-container {
+    transform: scale(1.05);
+    box-shadow: 0 0 60px rgba(127,255,110,0.35), 0 0 120px rgba(110,218,255,0.2);
+  }
+  .profile-badge {
+    position: absolute;
+    bottom: 12px;
+    right: -8px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(10,10,15,0.92);
+    border: 1px solid rgba(127,255,110,0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+  .profile-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7fff6e;
+    animation: profileDotPulse 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes profileRingSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes profileGlowPulse { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+  @keyframes profileDotPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
   /* Responsive fixes */
   @media (max-width: 991px) {
     .about-right-col { margin-top: 20px !important; }
@@ -185,15 +263,45 @@ function ContactCard({ item }) {
   );
 }
 
+function ProfileImage() {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className="profile-img-wrap"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="profile-img-ring" />
+      <div className="profile-img-ring-inner" />
+      <div className="profile-img-glow" />
+      <div className="profile-img-container">
+        <img
+          src={profileImg}
+          alt="Muhammad Bilal Hashmi"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            transition: 'transform 0.6s ease',
+            transform: hovered ? 'scale(1.08)' : 'scale(1)',
+          }}
+        />
+      </div>
+      <div className="profile-badge">
+        <span className="profile-badge-dot" />
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9.5, color:'#7fff6e', letterSpacing:'0.1em' }}>Available</span>
+      </div>
+    </div>
+  );
+}
+
 export const About = () => (
-  <section id="about" style={{ background:"linear-gradient(180deg,#0a0a0f 0%,#0d0d18 100%)", padding:"64px 0 72px", position:"relative", overflow:"hidden" }}>
-    {/* Blobs */}
-    <div style={{ position:"absolute", top:-100, left:-100, width:450, height:450, background:"radial-gradient(circle,rgba(127,255,110,0.06) 0%,transparent 70%)", pointerEvents:"none" }} />
-    <div style={{ position:"absolute", bottom:-70, right:-70, width:380, height:380, background:"radial-gradient(circle,rgba(110,218,255,0.06) 0%,transparent 70%)", pointerEvents:"none" }} />
+  <section id="about" style={{ padding:"80px 0", position:"relative", overflow:"hidden" }}>
 
     <Container>
       {/* ── Section header ── */}
-      <div style={{ marginBottom:32 }}>
+      <div style={{ marginBottom:40 }}>
         <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:10 }}>
           <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, letterSpacing:"0.3em", textTransform:"uppercase", color:"#606080" }}>— About Me</span>
           <div style={{ flex:1, height:1, background:"linear-gradient(to right,rgba(255,255,255,0.07),transparent)" }} />
@@ -205,43 +313,85 @@ export const About = () => (
       </div>
 
       {/* ── Main two-col layout ── */}
-      <Row style={{ gap:"20px 0" }}>
+      <Row style={{ gap:"24px 0" }}>
 
-        {/* LEFT */}
-        <Col xs={12} lg={7} className="about-left-col" style={{ paddingRight:10 }}>
-          {/* Education */}
+        {/* LEFT — Image + Education */}
+        <Col xs={12} lg={5} className="about-left-col" style={{ paddingRight:10 }}>
+          {/* Profile Image */}
+          <div style={{ display:'flex', justifyContent:'center', marginBottom:28 }}>
+            <ProfileImage />
+          </div>
+
+          {/* Interests */}
           <div
             className="about-info-card"
             style={{ marginBottom:14 }}
-            onMouseOver={e=>{e.currentTarget.style.borderColor="rgba(255,110,180,0.28)";e.currentTarget.style.boxShadow="0 0 28px rgba(255,110,180,0.07)";}}
+            onMouseOver={e=>{e.currentTarget.style.borderColor="rgba(255,210,80,0.28)";e.currentTarget.style.boxShadow="0 0 28px rgba(255,210,80,0.07)";}}
             onMouseOut={e =>{e.currentTarget.style.borderColor="rgba(255,255,255,0.08)";e.currentTarget.style.boxShadow="none";}}
           >
-            <div className="top-bar" style={{ background:"linear-gradient(to right,#ff6eb4,transparent)" }} />
-            <div className="card-eyebrow" style={{ color:"#ff6eb4" }}>🎓 Education</div>
-            <div style={{ fontSize:17, fontWeight:700, color:"#fff", letterSpacing:"-0.02em", marginBottom:4 }}>Bachelor of Computer Science</div>
-            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:"#7fff6e", marginBottom:2 }}>National University of Technology (NUTECH)</div>
-            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, color:"#606080" }}>📍 Islamabad, Pakistan · 2022 – 2026</div>
+            <div className="top-bar" style={{ background:"linear-gradient(to right,#ffd250,transparent)" }} />
+            <div className="card-eyebrow" style={{ color:"#ffd250" }}>💡 Beyond Code</div>
+            <p style={{ fontSize:13.5, lineHeight:1.75, color:"#c8c8e0", margin:0 }}>
+              When I'm not coding, you'll find me exploring new AI research papers, contributing to open-source, or experimenting with side projects that push creative boundaries.
+            </p>
           </div>
 
+          {/* Quick facts */}
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:10, marginTop: 40 }}>
+            {[
+              { num:'3+', label:'Projects Shipped', color:'#7fff6e' },
+              { num:'10+', label:'Technologies', color:'#6edaff' },
+              { num:'24/7', label:'Learning Mode', color:'#ff6eb4' },
+            ].map(s => (
+              <div key={s.label} style={{
+                padding:'14px 8px', textAlign:'center',
+                background:'rgba(255,255,255,0.025)',
+                border:'1px solid rgba(255,255,255,0.06)',
+                borderRadius:12,
+                transition:'all 0.25s ease',
+                cursor:'default',
+              }}
+                onMouseOver={e=>{
+                  e.currentTarget.style.borderColor=`${s.color}40`;
+                  e.currentTarget.style.boxShadow=`0 6px 24px ${s.color}15`;
+                  e.currentTarget.style.transform='translateY(-3px)';
+                }}
+                onMouseOut={e=>{
+                  e.currentTarget.style.borderColor='rgba(255,255,255,0.06)';
+                  e.currentTarget.style.boxShadow='none';
+                  e.currentTarget.style.transform='translateY(0)';
+                }}
+              >
+                <div style={{ fontSize:20, fontWeight:800, color:s.color, letterSpacing:'-0.02em', lineHeight:1.1 }}>{s.num}</div>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8.5, color:'#606080', letterSpacing:'0.08em', textTransform:'uppercase', marginTop:4 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </Col>
+
+        {/* RIGHT — About + What I Do + Contact */}
+        <Col xs={12} lg={7} className="about-right-col" style={{ paddingLeft:10 }}>
           {/* What I Do */}
           <div
             className="about-info-card"
+            style={{ marginBottom:14 }}
             onMouseOver={e=>{e.currentTarget.style.borderColor="rgba(110,218,255,0.28)";e.currentTarget.style.boxShadow="0 0 28px rgba(110,218,255,0.07)";}}
             onMouseOut={e =>{e.currentTarget.style.borderColor="rgba(255,255,255,0.08)";e.currentTarget.style.boxShadow="none";}}
           >
             <div className="top-bar" style={{ background:"linear-gradient(to right,#6edaff,transparent)" }} />
             <div className="card-eyebrow" style={{ color:"#6edaff" }}>⚡ What I Do</div>
-            <p style={{ fontSize:13.5, lineHeight:1.75, color:"#c8c8e0", margin:0, marginBottom:10 }}>
-              I'm a passionate <strong style={{ color:"#fff" }}>Full Stack Developer</strong> specializing in modern web applications and AI-powered solutions. With expertise in Python, React, FastAPI, and Git/GitHub, I craft scalable, efficient, and user-friendly products.
+            <p style={{ fontSize:13.5, lineHeight:1.8, color:"#c8c8e0", margin:0, marginBottom:10 }}>
+              I'm a passionate <strong style={{ color:"#fff" }}>Full-Stack Developer</strong> specializing in modern web applications and AI-powered solutions. With expertise in Python, React, FastAPI, and Git/GitHub, I craft scalable, efficient, and user-friendly products.
             </p>
-            <p style={{ fontSize:13.5, lineHeight:1.75, color:"#c8c8e0", margin:0 }}>
-              Recently focused on integrating <strong style={{ color:"#fff" }}>Machine Learning and LLMs</strong> (Google Gemini API) into full-stack systems — where intelligent back-ends meet polished front-ends.
+            <p style={{ fontSize:13.5, lineHeight:1.8, color:"#c8c8e0", margin:0, marginBottom:10 }}>
+              Recently focused on integrating <strong style={{ color:"#fff" }}>Machine Learning and LLMs</strong> into full-stack systems — where intelligent back-ends meet polished front-ends.
+            </p>
+            <p style={{ fontSize:13.5, lineHeight:1.8, color:"#c8c8e0", margin:0 }}>
+              I believe in writing <strong style={{ color:"#fff" }}>clean, maintainable code</strong> and building products that solve real problems. Currently working on my FYP — an AI-driven omni-channel CRM that unifies customer conversations.
             </p>
           </div>
-        </Col>
 
-        {/* RIGHT */}
-        <Col xs={12} lg={5} className="about-right-col" style={{ paddingLeft:10 }}>
+          {/* Contact */}
           <div
             className="about-contact-box"
             style={{ position:"relative", padding:"20px 18px 18px", background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:14, overflow:"hidden" }}
@@ -256,7 +406,7 @@ export const About = () => (
       </Row>
 
       {/* ── Tech Stack ── */}
-      <div style={{ marginTop:20, padding:"20px 22px", background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.06)", borderRadius:14 }}>
+      <div style={{ marginTop:28, padding:"20px 22px", background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.06)", borderRadius:14 }}>
         <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9.5, letterSpacing:"0.25em", textTransform:"uppercase", color:"#606080", marginBottom:14 }}>⬡ Tech Stack — hover to animate</div>
         <div className="tech-stack-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(72px,1fr))", gap:8 }}>
           {TECH_STACK.map((item, i) => <TechLogo key={item.name} item={item} index={i} />)}

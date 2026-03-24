@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { loadSlim } from "tsparticles-slim";
 import { particlesConfig } from "./particles-config";
 
 /* ── Animated terminal that types out code lines ── */
@@ -42,7 +42,21 @@ function Terminal() {
       width: '100%',
       maxWidth: 480,
       margin: '0 auto',
+      position: 'relative',
     }}>
+      {/* Top shine effect */}
+      <div style={{
+        position: 'absolute', top: 0, left: '-75%', width: '50%', height: 1,
+        background: 'linear-gradient(90deg, transparent, rgba(127,255,110,0.4) 40%, rgba(110,218,255,0.5) 60%, transparent)',
+        animation: 'shineSlide 3.5s ease-in-out infinite',
+        zIndex: 2, pointerEvents: 'none', filter: 'blur(2px)',
+      }} />
+      {/* Glow band along top edge */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+        background: 'linear-gradient(90deg, transparent, rgba(127,255,110,0.35) 25%, rgba(110,218,255,0.45) 50%, rgba(255,110,180,0.25) 75%, transparent)',
+        filter: 'blur(3px)', zIndex: 2, pointerEvents: 'none',
+      }} />
       {/* Traffic lights */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)' }}>
         {['#ff5f57', '#febc2e', '#28c840'].map(c => (
@@ -95,11 +109,10 @@ export const Banner = () => {
     return () => clearInterval(ticker);
   }, [text, delta, tick]);
 
-  const particlesInit = useCallback(async (engine) => { await loadFull(engine); }, []);
+  const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
   return (
     <section id="home" style={{
-      background: 'linear-gradient(180deg,#0a0a0f 0%,#0d0d18 100%)',
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
@@ -188,6 +201,7 @@ export const Banner = () => {
 
       <style>{`
         @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes shineSlide { 0%{left:-75%} 100%{left:125%} }
       `}</style>
     </section>
   );

@@ -81,7 +81,6 @@ export const Contact = () => {
 
   return (
     <section id="connect" style={{
-      background: 'linear-gradient(180deg,#0d0d18 0%,#0a0a0f 100%)',
       padding: '80px 0',
       position: 'relative',
       overflow: 'hidden',
@@ -182,7 +181,7 @@ export const Contact = () => {
           <Col size={12} md={7}>
             <TrackVisibility>
               {({ isVisible }) => (
-                <div style={{ opacity: 1 }}>
+                <div style={{ opacity: 1, paddingTop:60 }} >
                   <div style={{
                     padding: 'clamp(20px, 4vw, 36px)',
                     background: 'rgba(255,255,255,0.025)',
@@ -238,11 +237,11 @@ export const Contact = () => {
                         </Col>
                         <Col size={12} style={{ paddingLeft:0, paddingRight:0 }}>
                           <textarea
-                            rows="5" value={formDetails.message} placeholder="Your message..."
+                            rows="10" value={formDetails.message} placeholder="Your message..."
                             onChange={e => onFormUpdate('message', e.target.value)}
                             onFocus={() => setFocusedField('message')}
                             onBlur={() => setFocusedField(null)}
-                            style={{ ...inputStyle('message'), resize:'vertical', minHeight:120 }}
+                            style={{ ...inputStyle('message'), resize:'vertical', minHeight:240 }}
                           />
                         </Col>
                         <Col size={12} style={{ paddingLeft:0, paddingRight:0 }}>
