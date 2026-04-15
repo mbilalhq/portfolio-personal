@@ -57,10 +57,24 @@ export const Contact = () => {
     setButtonText("Sending...");
     setStatus({});
     try {
+      // Silently collect lead metadata from browser (no extra form fields)
+      const meta = {
+        timestamp: new Date().toISOString(),
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        locale: navigator.language || navigator.userLanguage || 'unknown',
+        screen: `${window.screen.width}x${window.screen.height}`,
+        viewport: `${window.innerWidth}x${window.innerHeight}`,
+        referrer: document.referrer || 'Direct',
+        page: window.location.href,
+        userAgent: navigator.userAgent,
+        platform: navigator.platform || 'unknown',
+        touchDevice: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+      };
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formDetails),
+        body: JSON.stringify({ ...formDetails, meta }),
       });
       const result = await response.json();
       if (response.ok && result.status === "Message Sent") {
@@ -73,6 +87,8 @@ export const Contact = () => {
       setStatus({ success: false, message: "Could not reach the server. Please check your connection and try again." });
     }
     setButtonText("Send Message");
+    // Auto-dismiss status message after 3 seconds
+    setTimeout(() => setStatus({}), 3000);
   };
 
   const inputStyle = (field) => ({
