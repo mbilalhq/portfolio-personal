@@ -10,39 +10,48 @@ export const DynamicBackground = () => {
   const animFrameRef = useRef(null);
   const timeRef = useRef(0);
   const particlesRef = useRef([]);
+  const cachedPageHeightRef = useRef(2000);
+  const frameCountRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      cachedPageHeightRef.current = Math.max(document.body.scrollHeight, 2000);
       initParticles();
     };
 
     // Stars: small to big (like sun), random colors
     const initParticles = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 12000);
+      // Reduced density + hard cap for high-res displays
+      const count = Math.min(
+        Math.floor((canvas.width * canvas.height) / 18000),
+        150
+      );
       const hues = [0, 30, 40, 45, 120, 140, 180, 200, 220, 260, 280, 320, 340, 170, 250, 300, 50, 190];
       particlesRef.current = Array.from({ length: count }, () => {
         // Size distribution: mostly small, some medium, few large (sun-like)
         const sizeRoll = Math.random();
         let size, glowSize;
-        if (sizeRoll < 0.6) {
+        if (sizeRoll < 0.65) {
           size = Math.random() * 1.5 + 0.3;        // small stars
           glowSize = size + 2;
-        } else if (sizeRoll < 0.85) {
+        } else if (sizeRoll < 0.88) {
           size = Math.random() * 2.5 + 1.5;        // medium stars
           glowSize = size + 4;
-        } else if (sizeRoll < 0.95) {
+        } else if (sizeRoll < 0.96) {
           size = Math.random() * 3 + 3;            // large stars
           glowSize = size + 8;
         } else {
           size = Math.random() * 4 + 5;            // sun-like giants
-          glowSize = size + 16;
+          glowSize = size + 14;
         }
+
+        const hue = hues[Math.floor(Math.random() * hues.length)];
 
         return {
           x: Math.random() * canvas.width,
@@ -52,7 +61,7 @@ export const DynamicBackground = () => {
           size,
           glowSize,
           baseOpacity: size > 4 ? 0.7 : size > 2.5 ? 0.4 : 0.2,
-          hue: hues[Math.floor(Math.random() * hues.length)],
+          hue,
           twinkleSpeed: Math.random() * 2 + 0.5,
           twinkleOffset: Math.random() * Math.PI * 2,
           parallaxFactor: size > 4 ? 0.05 : size > 2.5 ? 0.15 : 0.25 + Math.random() * 0.2,
@@ -79,12 +88,18 @@ export const DynamicBackground = () => {
       torchRef.current.active = false;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
 
     const draw = () => {
       timeRef.current += 0.008;
       const t = timeRef.current;
+      frameCountRef.current++;
+
+      // Refresh cached page height every 60 frames to avoid layout thrashing
+      if (frameCountRef.current % 60 === 0) {
+        cachedPageHeightRef.current = Math.max(document.body.scrollHeight, 2000);
+      }
 
       // Smooth scroll + calculate scroll speed
       smoothScrollRef.current += (scrollRef.current - smoothScrollRef.current) * 0.08;
@@ -95,18 +110,17 @@ export const DynamicBackground = () => {
 
       const scroll = smoothScrollRef.current;
       const { width, height } = canvas;
-      const pageHeight = Math.max(document.body.scrollHeight, 2000);
-      const maxScroll = pageHeight - window.innerHeight;
+      const maxScroll = cachedPageHeightRef.current - window.innerHeight;
       const scrollProgress = maxScroll > 0 ? Math.min(scroll / maxScroll, 1) : 0;
 
       // Speed multiplier for particles when scrolling
       const speedMult = 1 + scrollSpeed * 4; // 1x to 5x faster when scrolling
 
-      // Background base
+      // Background base — single clear
       ctx.fillStyle = "#0a0a0f";
       ctx.fillRect(0, 0, width, height);
 
-      // ── Ambient blobs ──
+      // ── Ambient blobs (reduced from 3 to 2 — the 3rd was barely visible) ──
       const hue1 = 140 + scrollProgress * 60;
       const blob1X = width * 0.25 + Math.sin(t * 0.5) * 100;
       const blob1Y = height * 0.3 + Math.cos(t * 0.3) * 40 - scrollProgress * 120;
@@ -125,15 +139,6 @@ export const DynamicBackground = () => {
       ctx.fillStyle = grad2;
       ctx.fillRect(0, 0, width, height);
 
-      const hue3 = 330 + scrollProgress * 30;
-      const blob3X = width * 0.5 + Math.sin(t * 0.6 + 1) * 70;
-      const blob3Y = height * 0.45 + Math.cos(t * 0.45 + 2) * 50 - scrollProgress * 80;
-      const grad3 = ctx.createRadialGradient(blob3X, blob3Y, 0, blob3X, blob3Y, 350);
-      grad3.addColorStop(0, `hsla(${hue3}, 100%, 60%, 0.055)`);
-      grad3.addColorStop(1, "transparent");
-      ctx.fillStyle = grad3;
-      ctx.fillRect(0, 0, width, height);
-
       // ── Soft scanner ──
       const scannerCycle = 12;
       const scannerProgress = (t % scannerCycle) / scannerCycle;
@@ -147,7 +152,16 @@ export const DynamicBackground = () => {
 
       // ── Stars / Particles ──
       const torch = torchRef.current;
-      particlesRef.current.forEach((p) => {
+      const particles = particlesRef.current;
+      const torchActive = torch.active;
+      const torchX = torch.x;
+      const torchY = torch.y;
+      const torchRadius = 160;
+      const torchRadiusSq = torchRadius * torchRadius;
+
+      for (let i = 0, len = particles.length; i < len; i++) {
+        const p = particles[i];
+
         // Base drift (always moving slowly)
         p.baseX += p.driftX * speedMult;
         p.baseY += p.driftY * speedMult;
@@ -176,14 +190,14 @@ export const DynamicBackground = () => {
         // Torch interaction — stars glow like real stars when light hits
         let inTorch = false;
         let torchIntensity = 0;
-        if (torch.active) {
-          const dx = p.x - torch.x;
-          const dy = p.y - torch.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const torchRadius = 160;
+        if (torchActive) {
+          const dx = displayX - torchX;
+          const dy = displayY - torchY;
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < torchRadius) {
+          if (distSq < torchRadiusSq) {
             inTorch = true;
+            const dist = Math.sqrt(distSq);
             torchIntensity = 1 - (dist / torchRadius);
             torchIntensity = torchIntensity * torchIntensity; // quadratic
 
@@ -194,18 +208,19 @@ export const DynamicBackground = () => {
           }
         }
 
-        // Glow halo for large stars
-        if (p.size > 3) {
+        // Glow halo — only for genuinely large stars (>4px), skip for medium
+        if (p.size > 4) {
+          const glowRadius = p.glowSize + (inTorch ? torchIntensity * 12 : 0);
           const glowGrad = ctx.createRadialGradient(
             displayX, displayY, 0,
-            displayX, displayY, p.glowSize + (inTorch ? torchIntensity * 12 : 0)
+            displayX, displayY, glowRadius
           );
           glowGrad.addColorStop(0, `hsla(${p.hue}, ${saturation}%, ${lightness}%, ${currentOpacity * 0.5})`);
           glowGrad.addColorStop(0.5, `hsla(${p.hue}, ${saturation}%, ${lightness}%, ${currentOpacity * 0.15})`);
           glowGrad.addColorStop(1, "transparent");
           ctx.fillStyle = glowGrad;
           ctx.beginPath();
-          ctx.arc(displayX, displayY, p.glowSize + (inTorch ? torchIntensity * 12 : 0), 0, Math.PI * 2);
+          ctx.arc(displayX, displayY, glowRadius, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -214,13 +229,13 @@ export const DynamicBackground = () => {
         ctx.arc(displayX, displayY, currentSize, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${p.hue}, ${saturation}%, ${lightness}%, ${currentOpacity})`;
         ctx.fill();
-      });
+      }
 
       // ── Torch ambient glow ──
-      if (torch.active) {
+      if (torchActive) {
         const torchGrad = ctx.createRadialGradient(
-          torch.x, torch.y, 0,
-          torch.x, torch.y, 320
+          torchX, torchY, 0,
+          torchX, torchY, 320
         );
         torchGrad.addColorStop(0, "rgba(255, 255, 255, 0.05)");
         torchGrad.addColorStop(0.3, "rgba(255,255,255,0.03)");

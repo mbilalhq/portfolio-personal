@@ -42,7 +42,20 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Client-side validation
+    if (!formDetails.firstName.trim() || !formDetails.email.trim() || !formDetails.message.trim()) {
+      setStatus({ success: false, message: "Please fill in your name, email, and message." });
+      return;
+    }
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDetails.email)) {
+      setStatus({ success: false, message: "Please enter a valid email address." });
+      return;
+    }
+
     setButtonText("Sending...");
+    setStatus({});
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -54,10 +67,10 @@ export const Contact = () => {
         setStatus({ success: true, message: "Message sent successfully! I'll get back to you soon." });
         setFormDetails(formInitialDetails);
       } else {
-        setStatus({ success: false, message: result.message || "Failed to send message." });
+        setStatus({ success: false, message: result.message || "Failed to send message. Please try again." });
       }
-    } catch {
-      setStatus({ success: false, message: "An error occurred. Please try again later." });
+    } catch (err) {
+      setStatus({ success: false, message: "Could not reach the server. Please check your connection and try again." });
     }
     setButtonText("Send Message");
   };

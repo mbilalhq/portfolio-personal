@@ -1,12 +1,17 @@
 const nodemailer = require("nodemailer");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
   const { firstName, lastName, email, message, phone } = req.body;
-  const name = `${firstName} ${lastName}`;
+
+  if (!firstName || !email || !message) {
+    return res.status(400).json({ message: "Name, email, and message are required." });
+  }
+
+  const name = `${firstName} ${lastName || ''}`.trim();
 
   const contactEmail = nodemailer.createTransport({
     service: 'gmail',
@@ -19,7 +24,8 @@ export default async function handler(req, res) {
   try {
     await contactEmail.verify();
   } catch (error) {
-    return res.status(500).json({ message: "Email server not ready", error });
+    console.error("Email server verification failed:", error);
+    return res.status(500).json({ message: "Email server not ready. Please try again later." });
   }
 
   const mail = {
@@ -28,7 +34,7 @@ export default async function handler(req, res) {
     subject: "Contact Form Submission - Portfolio",
     html: `<p>Name: ${name}</p>
            <p>Email: ${email}</p>
-           <p>Phone: ${phone}</p>
+           <p>Phone: ${phone || 'N/A'}</p>
            <p>Message: ${message}</p>`,
   };
 
@@ -36,6 +42,7 @@ export default async function handler(req, res) {
     await contactEmail.sendMail(mail);
     res.status(200).json({ code: 200, status: "Message Sent" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to send email", error });
+    console.error("Failed to send email:", error);
+    res.status(500).json({ message: "Failed to send email. Please try again later." });
   }
-}
+};

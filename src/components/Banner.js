@@ -1,9 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
-import { particlesConfig } from "./particles-config";
 
 /* ── Animated terminal that types out code lines ── */
 const TERMINAL_LINES = [
@@ -84,32 +81,31 @@ function Terminal() {
   );
 }
 
+const TO_ROTATE = ["Full-Stack Developer", "FastAPI Developer", "ML/AI Enthusiast", "Digital Innovator"];
+const PERIOD = 1000;
+
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(100 - Math.random() * 50);
-  const toRotate = ["Full-Stack Developer", "FastAPI Developer", "ML/AI Enthusiast", "Digital Innovator"];
-  const period = 1000;
 
   const tick = useCallback(() => {
-    const i = loopNum % toRotate.length;
-    const fullText = toRotate[i];
+    const i = loopNum % TO_ROTATE.length;
+    const fullText = TO_ROTATE[i];
     const updatedText = isDeleting
       ? fullText.substring(0, text.length - 1)
       : fullText.substring(0, text.length + 1);
     setText(updatedText);
     if (isDeleting) setDelta(prev => prev / 2);
-    if (!isDeleting && updatedText === fullText) { setIsDeleting(true); setDelta(period); }
+    if (!isDeleting && updatedText === fullText) { setIsDeleting(true); setDelta(PERIOD); }
     else if (isDeleting && updatedText === '') { setIsDeleting(false); setLoopNum(loopNum + 1); setDelta(200); }
-  }, [isDeleting, loopNum, period, text, toRotate]);
+  }, [isDeleting, loopNum, text]);
 
   useEffect(() => {
     const ticker = setInterval(tick, delta);
     return () => clearInterval(ticker);
   }, [text, delta, tick]);
-
-  const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
   return (
     <section id="home" style={{
@@ -124,8 +120,6 @@ export const Banner = () => {
       <div style={{ position: 'absolute', top: -150, left: -150, width: 600, height: 600, background: 'radial-gradient(circle,rgba(127,255,110,0.07) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
       <div style={{ position: 'absolute', bottom: -100, right: -100, width: 500, height: 500, background: 'radial-gradient(circle,rgba(110,218,255,0.07) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
       <div style={{ position: 'absolute', top: '40%', left: '35%', width: 350, height: 350, background: 'radial-gradient(circle,rgba(255,110,180,0.05) 0%,transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
-
-      <Particles id="tsparticles" init={particlesInit} options={particlesConfig} style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
 
       <Container style={{ position: 'relative', zIndex: 1 }}>
         <Row className="align-items-center" style={{ gap: '48px 0' }}>
