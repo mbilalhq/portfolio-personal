@@ -237,7 +237,7 @@ export const DynamicBackground = () => {
           torchX, torchY, 0,
           torchX, torchY, 320
         );
-        torchGrad.addColorStop(0, "rgba(255, 255, 255, 0.05)");
+        torchGrad.addColorStop(0, "rgba(255, 255, 255, 0.07)");
         torchGrad.addColorStop(0.3, "rgba(255,255,255,0.03)");
         torchGrad.addColorStop(0.7, "rgba(255,255,255,0.01)");
         torchGrad.addColorStop(1, "transparent");
