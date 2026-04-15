@@ -109,7 +109,7 @@ export const Contact = () => {
   });
 
   return (
-    <section id="connect" style={{
+    <section id="contact" style={{
       padding: '80px 0',
       position: 'relative',
       overflow: 'hidden',

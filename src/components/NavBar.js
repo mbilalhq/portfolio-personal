@@ -86,7 +86,7 @@ export const NavBar = () => {
 
             {/* Desktop nav links */}
             <div className="nav-desktop-links" style={{ display:'flex', alignItems:'center', gap:4 }}>
-                {['home','about','skills','experience','projects'].map(link => (
+                {['home','about','skills','experience','projects', 'contact'].map(link => (
                   <a
                     key={link} href={`#${link}`}
                     style={activeLink === link ? { ...linkActive, padding:'10px 16px' } : { ...linkBase, padding:'10px 16px' }}
@@ -111,7 +111,7 @@ export const NavBar = () => {
                   >{s.icon}</a>
                 ))}
               </div>
-              <HashLink to="#connect" style={{ textDecoration:'none' }}>
+              <HashLink to="#contact" style={{ textDecoration:'none' }}>
                 <button style={{
                   padding:'9px 20px', background:'linear-gradient(90deg, #7fff6e, #6edaff)',
                   border:'none', borderRadius:50, color:'#0a0a0f', fontWeight:700, fontSize:11.5,
@@ -147,7 +147,7 @@ export const NavBar = () => {
               borderRadius:16, animation:'navSlideDown 0.2s ease',
             }}>
               <div style={{ display:'flex', flexDirection:'column', gap:6, marginBottom:16 }}>
-              {['home','about','skills','experience','projects'].map(link => (
+              {['home','about','skills','experience','projects', 'contact'].map(link => (
                   <a
                     key={link} href={`#${link}`}
                     style={activeLink === link ? { ...linkActive, padding:'10px 16px' } : { ...linkBase, padding:'10px 16px' }}
@@ -162,7 +162,7 @@ export const NavBar = () => {
                   <a key={s.label} href={s.href} target={s.href.startsWith('mailto') ? '_self' : '_blank'} rel="noreferrer" style={socialIconStyle}>{s.icon}</a>
                 ))}
               </div>
-              <HashLink to="#connect" style={{ textDecoration:'none' }} onClick={() => setMenuOpen(false)}>
+              <HashLink to="#contact" style={{ textDecoration:'none' }} onClick={() => setMenuOpen(false)}>
                 <button style={{
                   width:'100%', padding:'11px 20px',
                   background:'linear-gradient(90deg, #7fff6e, #6edaff)',
