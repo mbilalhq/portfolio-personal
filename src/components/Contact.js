@@ -32,7 +32,7 @@ const SOCIALS = [
 ];
 
 export const Contact = () => {
-  const formInitialDetails = { firstName:'', lastName:'', email:'', phone:'', message:'' };
+  const formInitialDetails = { firstName: '', lastName: '', email: '', phone: '', message: '' };
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState('Send Message');
   const [status, setStatus] = useState({});
@@ -110,13 +110,13 @@ export const Contact = () => {
 
   return (
     <section id="contact" style={{
-      padding: '80px 0',
+      padding: '80px 0 140px 0', //padding here
       position: 'relative',
       overflow: 'hidden',
     }}>
       {/* Blobs */}
-      <div style={{ position:'absolute', top:-100, right:-100, width:400, height:400, background:'radial-gradient(circle,rgba(110,218,255,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
-      <div style={{ position:'absolute', bottom:-80, left:-80, width:380, height:380, background:'radial-gradient(circle,rgba(255,110,180,0.05) 0%,transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, background: 'radial-gradient(circle,rgba(110,218,255,0.06) 0%,transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: -80, left: -80, width: 380, height: 380, background: 'radial-gradient(circle,rgba(255,110,180,0.05) 0%,transparent 70%)', pointerEvents: 'none' }} />
 
       <style>{`
         ::placeholder { color: rgba(255,255,255,0.28) !important; }
@@ -133,33 +133,33 @@ export const Contact = () => {
                 <div style={{ opacity: 1 }}>
                   {/* Section header */}
                   <div style={{ marginBottom: 32 }}>
-                    <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:10, fontFamily:"'JetBrains Mono',monospace", fontSize:10, letterSpacing:'0.3em', textTransform:'uppercase', color:'#606080' }}>
-                      <span style={{ width:24, height:1, background:'#606080', display:'block' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#606080' }}>
+                      <span style={{ width: 24, height: 1, background: '#606080', display: 'block' }} />
                       Get In Touch
                     </div>
-                    <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:800, letterSpacing:'-0.03em', color:'#fff', lineHeight:1.05, margin:0 }}>
+                    <h2 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', lineHeight: 1.05, margin: 0 }}>
                       Let's build
-                      <span style={{ display:'block', color:'transparent', WebkitTextStroke:'1.5px rgba(255,255,255,0.2)' }}>something great.</span>
+                      <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.2)' }}>something great.</span>
                     </h2>
                   </div>
 
                   {/* Contact image */}
-                  <div style={{ position:'relative', marginBottom:28 }}>
-                    <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle,rgba(127,255,110,0.1) 0%,transparent 70%)', borderRadius:'50%', filter:'blur(20px)' }} />
+                  <div style={{ position: 'relative', marginBottom: 28 }}>
+                    <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle,rgba(127,255,110,0.1) 0%,transparent 70%)', borderRadius: '50%', filter: 'blur(20px)' }} />
                     <img
                       src={contactImg}
                       alt="Contact"
                       style={{
-                        position:'relative', zIndex:1,
-                        width:'100%', maxWidth:320,
-                        filter:'drop-shadow(0 0 30px rgba(110,218,255,0.15))',
-                        display:'block', margin:'0 auto',
+                        position: 'relative', zIndex: 1,
+                        width: '100%', maxWidth: 320,
+                        filter: 'drop-shadow(0 0 30px rgba(110,218,255,0.15))',
+                        display: 'block', margin: '0 auto',
                       }}
                     />
                   </div>
 
                   {/* Social chips */}
-                  <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {SOCIALS.map((s, i) => (
                       <a
                         key={s.label}
@@ -168,36 +168,36 @@ export const Contact = () => {
                         rel="noreferrer"
                         title={s.title}
                         style={{
-                          display:'flex', alignItems:'center', gap:14,
-                          padding:'12px 18px',
-                          background:'rgba(255,255,255,0.03)',
-                          border:'1px solid rgba(255,255,255,0.08)',
-                          borderRadius:12,
-                          textDecoration:'none',
-                          color:'#a8a8c0',
-                          fontFamily:"'JetBrains Mono',monospace",
-                          fontSize:12,
-                          transition:'all 0.22s ease',
-                          animation:`contactFadeUp 0.3s ${i*0.08}s ease both`,
+                          display: 'flex', alignItems: 'center', gap: 14,
+                          padding: '12px 18px',
+                          background: 'rgba(255,255,255,0.03)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          borderRadius: 12,
+                          textDecoration: 'none',
+                          color: '#a8a8c0',
+                          fontFamily: "'JetBrains Mono',monospace",
+                          fontSize: 12,
+                          transition: 'all 0.22s ease',
+                          animation: `contactFadeUp 0.3s ${i * 0.08}s ease both`,
                         }}
                         onMouseOver={e => {
-                          e.currentTarget.style.background=`${s.color}12`;
-                          e.currentTarget.style.borderColor=`${s.color}50`;
-                          e.currentTarget.style.color=s.color;
-                          e.currentTarget.style.transform='translateX(6px)';
-                          e.currentTarget.style.boxShadow=`-4px 0 0 ${s.color}`;
+                          e.currentTarget.style.background = `${s.color}12`;
+                          e.currentTarget.style.borderColor = `${s.color}50`;
+                          e.currentTarget.style.color = s.color;
+                          e.currentTarget.style.transform = 'translateX(6px)';
+                          e.currentTarget.style.boxShadow = `-4px 0 0 ${s.color}`;
                         }}
                         onMouseOut={e => {
-                          e.currentTarget.style.background='rgba(255,255,255,0.03)';
-                          e.currentTarget.style.borderColor='rgba(255,255,255,0.08)';
-                          e.currentTarget.style.color='#a8a8c0';
-                          e.currentTarget.style.transform='translateX(0)';
-                          e.currentTarget.style.boxShadow='none';
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                          e.currentTarget.style.color = '#a8a8c0';
+                          e.currentTarget.style.transform = 'translateX(0)';
+                          e.currentTarget.style.boxShadow = 'none';
                         }}
                       >
-                        <span style={{ color:s.color }}>{s.icon}</span>
-                        <span style={{ color:'#fff', fontWeight:500 }}>{s.title}</span>
-                        <span style={{ marginLeft:'auto', fontSize:10, opacity:0.4 }}>→</span>
+                        <span style={{ color: s.color }}>{s.icon}</span>
+                        <span style={{ color: '#fff', fontWeight: 500 }}>{s.title}</span>
+                        <span style={{ marginLeft: 'auto', fontSize: 10, opacity: 0.4 }}>→</span>
                       </a>
                     ))}
                   </div>
@@ -210,7 +210,7 @@ export const Contact = () => {
           <Col size={12} md={7}>
             <TrackVisibility>
               {({ isVisible }) => (
-                <div style={{ opacity: 1, paddingTop:60 }} >
+                <div style={{ opacity: 1, paddingTop: 60 }} >
                   <div style={{
                     padding: 'clamp(20px, 4vw, 36px)',
                     background: 'rgba(255,255,255,0.025)',
@@ -220,15 +220,15 @@ export const Contact = () => {
                     overflow: 'hidden',
                   }}>
                     {/* Top gradient bar */}
-                    <div style={{ position:'absolute', top:0, left:0, right:0, height:2, background:'linear-gradient(90deg,#7fff6e,#6edaff,#ff6eb4)' }} />
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg,#7fff6e,#6edaff,#ff6eb4)' }} />
 
-                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9.5, letterSpacing:'0.25em', textTransform:'uppercase', color:'#7fff6e', marginBottom:20 }}>
+                    <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#7fff6e', marginBottom: 20 }}>
                       📬 Send a Message
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                      <Row style={{ gap:'12px 0' }}>
-                        <Col size={12} sm={6} style={{ paddingRight:6, paddingLeft:0 }}>
+                      <Row style={{ gap: '12px 0' }}>
+                        <Col size={12} sm={6} style={{ paddingRight: 6, paddingLeft: 0 }}>
                           <input
                             type="text" value={formDetails.firstName} placeholder="First Name"
                             onChange={e => onFormUpdate('firstName', e.target.value)}
@@ -237,7 +237,7 @@ export const Contact = () => {
                             style={inputStyle('firstName')}
                           />
                         </Col>
-                        <Col size={12} sm={6} style={{ paddingLeft:6, paddingRight:0 }}>
+                        <Col size={12} sm={6} style={{ paddingLeft: 6, paddingRight: 0 }}>
                           <input
                             type="text" value={formDetails.lastName} placeholder="Last Name"
                             onChange={e => onFormUpdate('lastName', e.target.value)}
@@ -246,7 +246,7 @@ export const Contact = () => {
                             style={inputStyle('lastName')}
                           />
                         </Col>
-                        <Col size={12} sm={6} style={{ paddingRight:6, paddingLeft:0 }}>
+                        <Col size={12} sm={6} style={{ paddingRight: 6, paddingLeft: 0 }}>
                           <input
                             type="email" value={formDetails.email} placeholder="Email Address"
                             onChange={e => onFormUpdate('email', e.target.value)}
@@ -255,7 +255,7 @@ export const Contact = () => {
                             style={inputStyle('email')}
                           />
                         </Col>
-                        <Col size={12} sm={6} style={{ paddingLeft:6, paddingRight:0 }}>
+                        <Col size={12} sm={6} style={{ paddingLeft: 6, paddingRight: 0 }}>
                           <input
                             type="tel" value={formDetails.phone} placeholder="Phone No."
                             onChange={e => onFormUpdate('phone', e.target.value)}
@@ -264,39 +264,39 @@ export const Contact = () => {
                             style={inputStyle('phone')}
                           />
                         </Col>
-                        <Col size={12} style={{ paddingLeft:0, paddingRight:0 }}>
+                        <Col size={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
                           <textarea
                             rows="10" value={formDetails.message} placeholder="Your message..."
                             onChange={e => onFormUpdate('message', e.target.value)}
                             onFocus={() => setFocusedField('message')}
                             onBlur={() => setFocusedField(null)}
-                            style={{ ...inputStyle('message'), resize:'vertical', minHeight:240 }}
+                            style={{ ...inputStyle('message'), resize: 'vertical', minHeight: 240 }}
                           />
                         </Col>
-                        <Col size={12} style={{ paddingLeft:0, paddingRight:0 }}>
+                        <Col size={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
                           <button
                             type="submit"
                             style={{
-                              width:'100%', padding:'13px 24px',
-                              background:'linear-gradient(90deg,#7fff6e,#6edaff)',
-                              border:'none', borderRadius:10,
-                              color:'#0a0a0f', fontWeight:700, fontSize:13.5,
-                              fontFamily:"'JetBrains Mono',monospace",
-                              letterSpacing:'0.08em', cursor:'pointer',
-                              transition:'transform 0.2s, box-shadow 0.2s',
-                              boxShadow:'0 0 24px rgba(127,255,110,0.25)',
+                              width: '100%', padding: '13px 24px',
+                              background: 'linear-gradient(90deg,#7fff6e,#6edaff)',
+                              border: 'none', borderRadius: 10,
+                              color: '#0a0a0f', fontWeight: 700, fontSize: 13.5,
+                              fontFamily: "'JetBrains Mono',monospace",
+                              letterSpacing: '0.08em', cursor: 'pointer',
+                              transition: 'transform 0.2s, box-shadow 0.2s',
+                              boxShadow: '0 0 24px rgba(127,255,110,0.25)',
                             }}
-                            onMouseOver={e => { e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 8px 32px rgba(127,255,110,0.4)'; }}
-                            onMouseOut={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 0 24px rgba(127,255,110,0.25)'; }}
+                            onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(127,255,110,0.4)'; }}
+                            onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(127,255,110,0.25)'; }}
                           >
                             {buttonText} →
                           </button>
                         </Col>
                         {status.message && (
-                          <Col size={12} style={{ paddingLeft:0 }}>
+                          <Col size={12} style={{ paddingLeft: 0 }}>
                             <div style={{
-                              padding:'11px 16px', borderRadius:9, fontSize:13,
-                              fontFamily:"'JetBrains Mono',monospace",
+                              padding: '11px 16px', borderRadius: 9, fontSize: 13,
+                              fontFamily: "'JetBrains Mono',monospace",
                               background: status.success ? 'rgba(127,255,110,0.08)' : 'rgba(255,80,80,0.08)',
                               border: status.success ? '1px solid rgba(127,255,110,0.25)' : '1px solid rgba(255,80,80,0.25)',
                               color: status.success ? '#7fff6e' : '#ff6b6b',
