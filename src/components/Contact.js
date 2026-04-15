@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
-import { EnvelopeFill, Whatsapp, Linkedin } from 'react-bootstrap-icons';
+import { EnvelopeFill, Whatsapp, Linkedin, SendFill } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
 const SOCIALS = [
   {
     href: 'mailto:mbilalhq38@gmail.com',
-    icon: <EnvelopeFill size={20} />,
-    label: 'Email',
+    icon: <EnvelopeFill size={16} />,
+    title: 'Email',
     color: '#EA4335',
-    title: 'Email Me',
   },
   {
     href: 'https://wa.me/923100119166',
@@ -92,7 +91,7 @@ export const Contact = () => {
   };
 
   const inputStyle = (field) => ({
-    width: '100%',
+    width: '90%',
     padding: '12px 16px',
     background: 'rgba(255,255,255,0.04)',
     border: focusedField === field
@@ -210,9 +209,9 @@ export const Contact = () => {
           <Col size={12} md={7}>
             <TrackVisibility>
               {({ isVisible }) => (
-                <div style={{ opacity: 1, paddingTop: 60 }} >
+                <div style={{ opacity: 1, paddingTop: 230 }}>
                   <div style={{
-                    padding: 'clamp(20px, 4vw, 36px)',
+                    padding: 'clamp(18px, 3vw, 28px)',
                     background: 'rgba(255,255,255,0.025)',
                     border: '1px solid rgba(255,255,255,0.09)',
                     borderRadius: 20,
@@ -266,18 +265,18 @@ export const Contact = () => {
                         </Col>
                         <Col size={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
                           <textarea
-                            rows="10" value={formDetails.message} placeholder="Your message..."
+                            rows="5" value={formDetails.message} placeholder="Your message..."
                             onChange={e => onFormUpdate('message', e.target.value)}
                             onFocus={() => setFocusedField('message')}
                             onBlur={() => setFocusedField(null)}
-                            style={{ ...inputStyle('message'), resize: 'vertical', minHeight: 240 }}
+                            style={{ ...inputStyle('message'), resize: 'vertical', minHeight: 120 }}
                           />
                         </Col>
-                        <Col size={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
+                        <Col size={12} style={{ paddingLeft: 0, paddingRight: 0, marginTop: 8 }}>
                           <button
                             type="submit"
                             style={{
-                              width: '100%', padding: '13px 24px',
+                              width: '87%', padding: '12px 20px', marginLeft: '6px',
                               background: 'linear-gradient(90deg,#7fff6e,#6edaff)',
                               border: 'none', borderRadius: 10,
                               color: '#0a0a0f', fontWeight: 700, fontSize: 13.5,
